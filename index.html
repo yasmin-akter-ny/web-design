@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amee - Creative Designer & Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #2d2d2d;
+            --accent: #d4af37;
+            --text-light: #ffffff;
+            --text-muted: #b0b0b0;
+            --border: #3a3a3a;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .accent-color {
+            color: var(--accent);
+        }
+
+        .accent-border {
+            border-color: var(--accent);
+        }
+
+        .accent-bg {
+            background-color: var(--accent);
+        }
+
+        .diamond-frame {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            transform: rotate(45deg);
+            overflow: hidden;
+            border: 3px solid var(--accent);
+        }
+
+        .diamond-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: rotate(-45deg) scale(1.2);
+        }
+
+        .service-card {
+            background-color: var(--secondary);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1.5rem;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            background-color: var(--secondary);
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--border);
+            background-color: transparent;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active {
+            background-color: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .blog-card {
+            background-color: var(--secondary);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .blog-card:hover {
+            border-color: var(--accent);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--secondary);
+            border: 1px solid var(--border);
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            padding: 0.75rem 2rem;
+            background-color: var(--accent);
+            color: var(--primary);
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            padding: 0.75rem 2rem;
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            background-color: var(--primary);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 3rem;
+            padding: 4rem 3rem;
+            min-height: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero-content h2 {
+            font-size: 1.8rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .hero-divider {
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 3rem;
+            padding: 4rem 3rem;
+            background-color: var(--secondary);
+        }
+
+        .about-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .testimonial-section {
+            padding: 4rem 3rem;
+            background-color: var(--secondary);
+            text-align: center;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .testimonial-author {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-role {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent);
+            margin: 0.5rem auto 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section,
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .diamond-frame {
+                width: 200px;
+                height: 200px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">Yasmin</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">I am Yasmin Akter</p>
+            <h1>Digital Marketing Expert</h1>
+            <div class="hero-divider"></div>
+            <button class="btn-primary">Get More</button>
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <div class="diamond-frame">
+               <img src="/placeholder.svg?height=300&width=300" alt="Designer Portrait">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section style="padding: 4rem 3rem; background-color: var(--primary);">
+        <h2 class="section-title">My Services</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3 style="margin-bottom: 1rem;">Facebook Marketing</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+                <p style="color: var(--accent); margin-top: 1rem; cursor: pointer;">Read More →</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🌐</div>
+                <h3 style="margin-bottom: 1rem;">Instagram Marketing</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+                <p style="color: var(--accent); margin-top: 1rem; cursor: pointer;">Read More →</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3 style="margin-bottom: 1rem;">LinkedIn Professional Marketing</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+                <p style="color: var(--accent); margin-top: 1rem; cursor: pointer;">Read More →</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div style="display: flex; justify-content: center;">
+            <div class="diamond-frame">
+                <img src="/placeholder.svg?height=300&width=300" alt="Designer">
+            </div>
+        </div>
+        <div class="about-content">
+            <h3>About Me</h3>
+            <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+            <p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks.</p>
+            <button class="btn-secondary" style="margin-top: 1.5rem;">Download Resume</button>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" style="padding: 4rem 3rem; background-color: var(--primary);">
+        <h2 class="section-title">My Works</h2>
+        
+        <div style="display: flex; gap: 1rem; justify-content: center; margin: 2rem 0 3rem; flex-wrap: wrap;">
+            <button class="filter-btn active" onclick="filterPortfolio('all')">All</button>
+            <button class="filter-btn" onclick="filterPortfolio('print')">Print</button>
+            <button class="filter-btn" onclick="filterPortfolio('design')">Design</button>
+            <button class="filter-btn" onclick="filterPortfolio('web')">Web Design</button>
+            <button class="filter-btn" onclick="filterPortfolio('card')">Card</button>
+            <button class="filter-btn" onclick="filterPortfolio('dev')">Development</button>
+        </div>
+
+        <div class="portfolio-grid" id="portfolioGrid">
+            <div class="portfolio-item" data-category="design">
+                <img src="/placeholder.svg?height=300&width=300" alt="Design Project">
+            </div>
+            <div class="portfolio-item" data-category="web">
+                <img src="/placeholder.svg?height=300&width=300" alt="Web Design">
+            </div>
+            <div class="portfolio-item" data-category="print">
+                <img src="/placeholder.svg?height=300&width=300" alt="Print Design">
+            </div>
+            <div class="portfolio-item" data-category="design">
+                <img src="/placeholder.svg?height=300&width=300" alt="Design Concept">
+            </div>
+            <div class="portfolio-item" data-category="card">
+                <img src="/placeholder.svg?height=300&width=300" alt="Business Card">
+            </div>
+            <div class="portfolio-item" data-category="dev">
+                <img src="/placeholder.svg?height=300&width=300" alt="Web Development">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+        <p class="testimonial-text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>
+        <div class="testimonial-author">John Doe</div>
+        <div class="testimonial-role">CEO at Creative Studio</div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" style="padding: 4rem 3rem; background-color: var(--primary);">
+        <h2 class="section-title">Latest News</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem;">
+            <div class="blog-card">
+                <img src="/placeholder.svg?height=200&width=300" alt="Blog Post">
+                <div class="blog-card-content">
+                    <h4 style="margin-bottom: 0.5rem;">Everything is easy when you think it easy</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">By Admin</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Industry content has been the industry's standard dummy text ever since the 1500s.</p>
+                    <button class="btn-primary" style="width: 100%;">Read More</button>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="/placeholder.svg?height=200&width=300" alt="Blog Post">
+                <div class="blog-card-content">
+                    <h4 style="margin-bottom: 0.5rem;">Everything is easy when you think it easy</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">By Admin</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Industry content has been the industry's standard dummy text ever since the 1500s.</p>
+                    <button class="btn-primary" style="width: 100%;">Read More</button>
+                </div>
+            </div>
+            <div class="blog-card">
+                <img src="/placeholder.svg?height=200&width=300" alt="Blog Post">
+                <div class="blog-card-content">
+                    <h4 style="margin-bottom: 0.5rem;">Everything is easy when you think it easy</h4>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1rem;">By Admin</p>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Industry content has been the industry's standard dummy text ever since the 1500s.</p>
+                    <button class="btn-primary" style="width: 100%;">Read More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="padding: 4rem 3rem; background-color: #f5f5f5; color: #333;">
+        <h2 class="section-title" style="color: #333;">Contact Me</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; max-width: 1000px; margin-left: auto; margin-right: auto;">
+            <div>
+                <h4 style="margin-bottom: 2rem; font-size: 1.1rem;">Contact Info</h4>
+                <div style="margin-bottom: 2rem;">
+                    <p style="color: var(--text-muted); margin-bottom: 0.5rem;">📍 Address</p>
+                    <p>123 Main Street, New York, NY 10001</p>
+                </div>
+                <div style="margin-bottom: 2rem;">
+                    <p style="color: var(--text-muted); margin-bottom: 0.5rem;">📞 Phone</p>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div>
+                    <p style="color: var(--text-muted); margin-bottom: 0.5rem;">✉️ Email</p>
+                    <p>hello@amee.com</p>
+                </div>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 2rem; font-size: 1.1rem;">Send Your Message</h4>
+                <form onsubmit="handleSubmit(event)">
+                    <input type="text" class="form-input" placeholder="Your Name" required>
+                    <input type="email" class="form-input" placeholder="Your Email" required>
+                    <input type="text" class="form-input" placeholder="Subject" required>
+                    <textarea class="form-input" placeholder="Your Message" rows="4" required></textarea>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background-color: var(--primary); border-top: 1px solid var(--border); padding: 2rem 3rem; text-align: center; color: var(--text-muted);">
+        <p style="margin-bottom: 1rem;">© 2025 Amee. All Rights Reserved.</p>
+        <div style="display: flex; gap: 2rem; justify-content: center; margin-bottom: 1rem;">
+            <a href="#" style="color: var(--accent); text-decoration: none;">Privacy Policy</a>
+            <a href="#" style="color: var(--accent); text-decoration: none;">Terms of Service</a>
+            <a href="#" style="color: var(--accent); text-decoration: none;">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        // Portfolio Filter
+        function filterPortfolio(category) {
+            const items = document.querySelectorAll('.portfolio-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                    setTimeout(() => item.style.opacity = '1', 10);
+                } else {
+                    item.style.opacity = '0';
+                    setTimeout(() => item.style.display = 'none', 300);
+                }
+            });
+        }
+
+        // Form Submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            event.target.reset();
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Add scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .blog-card, .portfolio-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
